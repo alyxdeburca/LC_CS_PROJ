@@ -1,4 +1,4 @@
-# Alyx Burke 2023 Leaving Cert CS Project
+# Adam Burke 2023 Leaving Cert CS Project
 
 **To Install requirements:**
 
