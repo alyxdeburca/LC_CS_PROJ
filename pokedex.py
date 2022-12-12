@@ -1,26 +1,23 @@
 import pygame
-from menu import draw_menu
 from main import drawsprite
 
 
 def run():
-	pygame.display.set_caption("Generation 1 PokeDex")
-	white = (255, 255, 255)
-	black = (0, 0, 0)
-	pygame.init()
-	pygame.font.init()
-	pygame.font.get_init()
-	font = pygame.font.Font('assets/fonts/Roboto-Regular.ttf', 12)
-	screen = pygame.display.set_mode((1280, 720))
-	screen.fill(white)
-	posx = 0
-	posy = 0
-	draw_menu()
+	pygame.display.set_caption("Generation 1 PokeDex")  # Change Window Title to match current screen
+	white = (255, 255, 255)  # RGB Colour Code for White
+	black = (0, 0, 0)  # RGB Colour Code for Black
+	pygame.init()  # Initialise pygame library
+	pygame.font.init()  # Initialise Google Roboto Font
+	font = pygame.font.Font('assets/fonts/Roboto-Regular.ttf', 15)
+	screen = pygame.display.set_mode((1280, 720))  # Set Window Resolution to HD (1280*720)
+	screen.fill(white)  # Set Background colour to white
+	posx = 0  # Declare sprite starting position x
+	posy = 0  # Declare sprite starting position y
 
-	for i in range(1, 151):
-		text = font.render(str(i), True, black)
+	for i in range(0, 151):
+		text = font.render(str(i+1), True, black)
 		pygame.display.flip()
-		width, height = drawsprite(i, posx, posy, 1)
+		width, height = drawsprite(i+1, posx, posy, 1)
 		textrect = text.get_rect()
 		textrect.center = (posx + width / 2, posy + height + 10)
 		screen.blit(text, textrect)
