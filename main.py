@@ -26,7 +26,6 @@ pygame.init()  # Initialise pygame library
 pygame.display.set_caption("Pokemon Battle Sim")  # Set Caption for main menu
 screen = pygame.display.set_mode((1280, 720))  # Set Window Resolution to HD (1280*720)
 screen.fill(white)  # Set Background colour to white
-font = pygame.font.Font('assets/fonts/Roboto-Regular.ttf', 12)  # Import Google Roboto Font from assets folder
 FRAME_PER_SECOND_CLOCK = pygame.time.Clock()
 FRAME_PER_SECOND_CLOCK.tick(60)
 width = screen.get_width()  # Store screen horizontal resolution as a variable
