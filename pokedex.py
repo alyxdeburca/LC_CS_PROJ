@@ -4,7 +4,8 @@ from main import drawsprite
 
 
 def run():
-	pygame.display.set_caption("Generation 1 PokeDex")
+	global selector
+	selector = False
 	white = (255, 255, 255)
 	black = (0, 0, 0)
 	pygame.init()
