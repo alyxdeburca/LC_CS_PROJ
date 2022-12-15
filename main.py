@@ -1,5 +1,5 @@
 import json
-from sys import exit as gkill
+from sys import exit as killgame
 import pygame
 from math import ceil
 
@@ -65,7 +65,7 @@ def read_input():
 				pokedex.run()
 			if mouse[0] >= width / 3 * 2 and height - 80 <= mouse[1] <= height:  # If QUIT button is clicked
 				running = False
-				gkill(0)
+				killgame(0)
 			if mouse[0] >= width / 3 * 2 and height - 160 <= mouse[1] <= height - 80:
 				options.run()
 			if mouse[0] >= 900 and 144 <= mouse[1] <= 216:
@@ -77,17 +77,17 @@ def read_input():
 			if mouse[0] >= width / 3 * 2 and height - 300 <= mouse[1] <= height - 160:
 				fileio.save(my_team)
 			if selector:
-				print(my_team)
 				selectedx = ceil(mouse[0] / 50)
 				selectedy = ceil(mouse[1] / 66)
-				if selectedy == 1 and selectedx < 800:
+				if selectedy == 1 and selectedx <= 16:
 					drawHover.run(50 * (selectedx - 1), 50 * (selectedy - 1), 50, 66)
-				elif 10 > selectedy > 1 and selectedx < 800:
+					my_team.append(selectedx + ((selectedy - 1) * 16))
+				elif 10 > selectedy > 1 and selectedx <= 16:
 					drawHover.run(50 * (selectedx - 1), (selectedy - 1) * 70, 50, 66)
-					my_team.append(selectedx+((selectedy-1)*16))
+					my_team.append(selectedx + ((selectedy - 1) * 16))
 				if selectedy > 10 and selectedx <= 6:
 					drawHover.run(50 * (selectedx - 1), 630, 50, 66)
-					my_team.append(selectedx+((selectedy-1)*16))
+					my_team.append(selectedx + ((selectedy - 1) * 16))
 
 	if mouse[0] >= width / 3 * 2 and height / 10 <= mouse[1] <= height / 10 * 2:  # PokeDex
 		drawHover.run(900, 75, 350, 90)
@@ -95,6 +95,7 @@ def read_input():
 		drawHover.run(900, 160, 350, 90)
 	if mouse[0] >= width / 3 * 2 and height - 80 <= mouse[1] <= height:  # Exit
 		drawHover.run(900, height - 110, 350, 90)
+	# TODO: Create Option Menu containing sound on/off, setting for number of players, AI difficulty
 	if mouse[0] >= width / 3 * 2 and height - 160 <= mouse[1] <= height - 80:  # Option
 		drawHover.run(900, height - 190, 350, 90)
 	if mouse[0] >= width / 3 * 2 and height - 300 <= mouse[1] <= height - 160:  # Save
@@ -110,7 +111,7 @@ def main():
 		menu.draw_menu()  # Draw main menu to screen
 		read_input()  # Read user input and window state
 		pygame.display.flip()  # Update display
-		if len(my_team) > 6:
+		if len(my_team) >= 6:
 			selector = False
 			pygame.display.set_caption("Press Save to save your team")
 
