@@ -3,8 +3,7 @@ from sys import exit as kill_game
 from math import ceil
 import hover
 import menu
-hovercolour = pygame.Color(0, 0, 0, 50)
-pygame.init()
+import pokedex
 
 
 class Mouse(object):
@@ -16,12 +15,14 @@ class Mouse(object):
 		self.hoverObj = hover.Hover(screen)
 		self.screen = screen
 		self.menuObj = menu.Menu(screen)
+		self.dexObj = pokedex.Dex(screen)
 
 	def grab(self):
 		if self.selmode is True and self.mousex <= 800:
 			print("Selected", ceil(self.mousex/50))
 		if self.mousex >= 900 and 72 <= self.mousey <= 144:
 			print("Pokedex")
+			self.dexObj.draw()
 		if self.mousex >= 900 and 144 <= self.mousey <= 216:
 			print("Pokemon")
 			self.selmode = True
@@ -38,6 +39,13 @@ class Mouse(object):
 
 		if self.mousex >= 900 and 72 <= self.mousey <= 144:
 			self.hoverObj.draw(900, 75, 350, 90)
-		elif
+		elif self.mousex >= 900 and 144 <= self.mousey <= 216:
+			self.hoverObj.draw(900, 160, 350, 90)
+		elif self.mousex >= 900 and 640 <= self.mousey <= 720:
+			self.hoverObj.draw(900, 610, 350, 90)
+		elif self.mousex >= 900 and 560 <= self.mousey <= 640:
+			self.hoverObj.draw(900, 530, 350, 90)
+		elif self.mousex >= 900 and 420 <= self.mousey <= 560:
+			self.hoverObj.draw(900, 420, 350, 90)
 		else:
 			self.menuObj.draw(self.screen)
