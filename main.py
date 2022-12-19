@@ -1,9 +1,7 @@
 import input
 import pokemon
 import pygame
-import hover
 import menu
-import time
 
 
 class Player(pokemon.Pokemon):
@@ -25,25 +23,23 @@ screen.fill(white)  # Set Background colour to white
 screen.convert_alpha()
 FRAME_PER_SECOND_CLOCK = pygame.time.Clock()
 FRAME_PER_SECOND_CLOCK.tick(60)
-mouseObj = input.Mouse()
+mouseObj = input.Mouse(screen)
 main_menu = menu.Menu(screen)
 main_menu.draw(screen)
 
 
 def main():
 	global main_menu
-	global hoverObj
 	running = True
-	main_menu.draw(screen)
 	pygame.display.flip()
 	while running:
+		main_menu.draw(screen)
 		mouseObj.get_pos()
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:  # Not technically an input but is grabbed as an event in the same way
 				running = False
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				mouseObj.grab()
-
 		pygame.display.flip()
 
 
