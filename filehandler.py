@@ -1,7 +1,8 @@
 import json
 
+
 class FileHandler(object):
-	def __init__(self, file, data):
+	def __init__(self, file):
 		self.data = []
 		self.file = file
 

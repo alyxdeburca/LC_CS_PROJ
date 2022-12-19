@@ -1,9 +1,9 @@
 import pygame
-from sys import exit as kill_game
 from math import ceil
 import hover
 import menu
 import pokedex
+from sys import exit as kill_game
 
 
 class Mouse(object):
@@ -16,20 +16,24 @@ class Mouse(object):
 		self.screen = screen
 		self.menuObj = menu.Menu(screen)
 		self.dexObj = pokedex.Dex(screen)
+		self.menuRect = pygame.Rect(0, 0, 850, 720)
 
 	def grab(self):
 		if self.selmode is True and self.mousex <= 800:
 			print("Selected", ceil(self.mousex/50))
 		if self.mousex >= 900 and 72 <= self.mousey <= 144:
-			print("Pokedex")
+			self.screen.fill((255, 255, 255), self.menuRect)
 			self.dexObj.draw()
+		if self.mousex >= 900 and 420 <= self.mousey <= 560:
+			self.screen.fill((255, 255, 255), self.menuRect)
 		if self.mousex >= 900 and 144 <= self.mousey <= 216:
-			print("Pokemon")
+			self.screen.fill((255, 255, 255), self.menuRect)
+			self.dexObj.draw()
 			self.selmode = True
 		if self.mousex >= 900 and 560 <= self.mousey <= 640:
+			self.screen.fill((255, 255, 255), self.menuRect)
 			print("Options")
 		if self.mousex >= 900 and 640 <= self.mousey <= 720:
-			print("Quit")
 			kill_game(0)
 
 	def get_pos(self):

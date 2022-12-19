@@ -3,8 +3,8 @@ import pygame
 
 class Menu(object):
 	def __init__(self, screen):
-		self.image = None
 		self.screen = screen
+		self.image = None
 		self.MENU_SIZE = (1280 / 3, 720)
 
 	def draw(self, screen):

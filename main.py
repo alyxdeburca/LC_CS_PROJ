@@ -29,7 +29,6 @@ main_menu.draw(screen)
 
 
 def main():
-	global main_menu
 	running = True
 	pygame.display.flip()
 	while running:

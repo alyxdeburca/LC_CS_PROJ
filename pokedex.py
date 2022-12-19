@@ -24,5 +24,8 @@ class Dex(object):
 			if self.posx >= 1280 - 50 - 1280 / 3 - 5:
 				self.posx = 0
 				self.posy = self.posy + 50 + 20
+			if i == 150:
+				self.posx = 0
+				self.posy = 0
 		pygame.display.flip()
 
