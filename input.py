@@ -4,6 +4,19 @@ import hover
 import menu
 import pokedex
 from sys import exit as kill_game
+import subprocess
+
+
+def spawn_program_and_die(program, exit_code=0):
+	"""
+	Start an external program and exit the script
+	with the specified return code.
+	Takes the parameter program, which is a list
+	that corresponds to the argv of your command.
+	"""
+	# Start the external program
+	subprocess.Popen(program)
+	# We have started the program, and can suspend this interpreter
 
 
 class Mouse(object):
@@ -20,7 +33,7 @@ class Mouse(object):
 
 	def grab(self):
 		if self.selmode is True and self.mousex <= 800:
-			print("Selected", ceil(self.mousex/50))
+			print("Selected", ceil(self.mousex / 50))
 		if self.mousex >= 900 and 72 <= self.mousey <= 144:
 			self.screen.fill((255, 255, 255), self.menuRect)
 			self.dexObj.draw()
@@ -32,7 +45,7 @@ class Mouse(object):
 			self.selmode = True
 		if self.mousex >= 900 and 560 <= self.mousey <= 640:
 			self.screen.fill((255, 255, 255), self.menuRect)
-			print("Options")
+			spawn_program_and_die(['python', 'openai.py'])
 		if self.mousex >= 900 and 640 <= self.mousey <= 720:
 			kill_game(0)
 
