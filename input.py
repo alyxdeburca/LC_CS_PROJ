@@ -45,7 +45,7 @@ class Mouse(object):
 			self.selmode = True
 		if self.mousex >= 900 and 560 <= self.mousey <= 640:
 			self.screen.fill((255, 255, 255), self.menuRect)
-			spawn_program_and_die(['python', 'openai.py'])
+			spawn_program_and_die(['python', 'battle.py'])
 		if self.mousex >= 900 and 640 <= self.mousey <= 720:
 			kill_game(0)
 
