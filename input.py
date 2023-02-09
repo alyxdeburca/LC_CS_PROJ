@@ -3,24 +3,14 @@ from math import ceil
 import hover
 import menu
 import pokedex
-from sys import exit as kill_game
+from sys import exit
 import subprocess
-
-
-def spawn_program_and_die(program, exit_code=0):
-	"""
-	Start an external program and exit the script
-	with the specified return code.
-	Takes the parameter program, which is a list
-	that corresponds to the argv of your command.
-	"""
-	# Start the external program
-	subprocess.Popen(program)
-	# We have started the program, and can suspend this interpreter
-
+import sprite
 
 class Mouse(object):
 	def __init__(self, screen):
+		self.battle = False
+		self.battlesim = None
 		self.mouse = None
 		self.mousex = None
 		self.mousey = None
@@ -30,6 +20,7 @@ class Mouse(object):
 		self.menuObj = menu.Menu(screen)
 		self.dexObj = pokedex.Dex(screen)
 		self.menuRect = pygame.Rect(0, 0, 850, 720)
+		self.sprite = sprite.Sprite(screen)
 
 	def grab(self):
 		if self.selmode is True and self.mousex <= 800:
@@ -41,13 +32,23 @@ class Mouse(object):
 			self.screen.fill((255, 255, 255), self.menuRect)
 		if self.mousex >= 900 and 144 <= self.mousey <= 216:
 			self.screen.fill((255, 255, 255), self.menuRect)
-			self.dexObj.draw()
-			self.selmode = True
+			for i in range(6):
+				if i <= 4:
+					self.sprite.draw(25, 0+(50*4*i), (720/2)-150, 4)
+					self.sprite.draw(7, 0+(50*4*i), (720/2)-150, 4)
+					self.sprite.draw(4, 0+(50*4*i), (720/2)-150, 4)
+					self.sprite.draw(1, 0+(50*4*i), (720/2)-150, 4)
+				else:
+					self.sprite.draw(10, 0 + (50 * 4 * i-4), (720 / 2) +200, 4)
+					self.sprite.draw(13, 0 + (50 * 4 * i-4), (720 / 2) +200, 4)
 		if self.mousex >= 900 and 560 <= self.mousey <= 640:
 			self.screen.fill((255, 255, 255), self.menuRect)
-			spawn_program_and_die(['python', 'battle.py'])
+			self.battlesim = subprocess.Popen(['python', 'battle.py'])
+			self.battle = True
 		if self.mousex >= 900 and 640 <= self.mousey <= 720:
-			kill_game(0)
+			if self.battle is True:
+				self.battlesim.kill()
+			exit(0)
 
 	def get_pos(self):
 		self.mouse = pygame.mouse.get_pos()

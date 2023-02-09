@@ -11,12 +11,13 @@ class Dex(object):
 		self.posx = 0  # Declare sprite starting position x
 		self.posy = 0  # Declare sprite starting position y
 		self.screen = screen
+		self.scale = 1
 
 	def draw(self):
 		for i in range(0, 151):
 			text = self.font.render(str(i + 1), True, (0, 0, 0))
 			spriteobj = sprite.Sprite(self.screen)
-			spriteobj.draw(i + 1, self.posx, self.posy)
+			spriteobj.draw(i + 1, self.posx, self.posy, self.scale)
 			textrect = text.get_rect()
 			textrect.center = (self.posx + 50 / 2, self.posy + 50 + 10)
 			self.screen.blit(text, textrect)
