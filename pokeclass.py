@@ -21,14 +21,6 @@ class Pokemon:
             damage = (((2 * self.level / 5 + 2) * move.power * attack_stat / defense_stat) / 50) + 2
             target.stats["hp"] = max(0, target.stats["hp"] - damage)
             print(f"{self.name} used {move.name} on {target.name} and did {damage} damage.")
-            if target.is_fainted():
-                print(f"{target.name} has fainted.")
-            else:
-                # Choose a random move from the target's moves list
-                move = random.choice(target.moves)
-                # Pass the original attacker as the target
-                attacker = self
-                target.use_move(move, attacker)
         else:
             print(f"{self.name} does not know {move.name}.")
 

@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import pygame
 import sys
+import random
 from pokeclass import Pokemon
 
 # Set up Pygame and the window
@@ -9,7 +10,6 @@ screen = pygame.display.set_mode((640, 480))
 
 # Load the player's party of Pokémon
 player_party = [Pokemon.Pikachu(), Pokemon.Squirtle(), Pokemon.Charmander()]
-player_party[0].level = 20
 # Load the opponent's party of Pokémon
 opponent_party = [Pokemon.Bulbasaur(), Pokemon.Caterpie(), Pokemon.Weedle()]
 # Set up the current Pokémon for each trainer
@@ -28,26 +28,57 @@ def draw_pokemon(pokemon, position):
 # Set up the battle loop
 while True:
 	opponent_party[0].level = 100
+	player_party[0].level = 100
+
 	# Handle events
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			pygame.quit()
 			sys.exit()
-		if event.type == pygame.KEYDOWN:
+		if event.type == pygame.KEYUP:
 			# Check for player input to select a move
 			if event.key == pygame.K_1:
 				player_pokemon.use_move(player_pokemon.moves[0], opponent_pokemon)
-			elif event.key == pygame.K_2:
+				if opponent_pokemon.is_fainted():
+					print(f'{opponent_pokemon.name} has fainted!')
+				else:
+					move = random.choice(opponent_pokemon.moves)
+					attacker = player_pokemon
+					opponent_pokemon.use_move(move, attacker)
+				player_pokemon.update()
+				opponent_pokemon.update()
+			if event.key == pygame.K_2:
 				player_pokemon.use_move(player_pokemon.moves[1], opponent_pokemon)
-			elif event.key == pygame.K_3:
+				if opponent_pokemon.is_fainted():
+					print(f'{opponent_pokemon.name} has fainted!')
+				else:
+					move = random.choice(opponent_pokemon.moves)
+					attacker = player_pokemon
+					opponent_pokemon.use_move(move, attacker)
+				player_pokemon.update()
+				opponent_pokemon.update()
+			if event.key == pygame.K_3:
 				player_pokemon.use_move(player_pokemon.moves[2], opponent_pokemon)
-			elif event.key == pygame.K_4:
+				if opponent_pokemon.is_fainted():
+					print(f'{opponent_pokemon.name} has fainted!')
+				else:
+					move = random.choice(opponent_pokemon.moves)
+					attacker = player_pokemon
+					opponent_pokemon.use_move(move, attacker)
+				player_pokemon.update()
+				opponent_pokemon.update()
+			if event.key == pygame.K_4:
 				player_pokemon.use_move(player_pokemon.moves[3], opponent_pokemon)
+				if opponent_pokemon.is_fainted():
+					print(f'{opponent_pokemon.name} has fainted!')
+				else:
+					move = random.choice(opponent_pokemon.moves)
+					attacker = player_pokemon
+					opponent_pokemon.use_move(move, attacker)
+				player_pokemon.update()
+				opponent_pokemon.update()
 		
 	# Update the game state
-	player_pokemon.update()
-	opponent_pokemon.update()
-
 	# Check if either Pokémon has fainted
 	if player_pokemon.is_fainted():
 		# Check if the player has any remaining Pokémon
