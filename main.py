@@ -2,8 +2,7 @@ import input
 import pokemon
 import pygame
 import menu
-
-
+import font
 class Player(pokemon.Pokemon):
 	def __init__(self, health, player, accuracy, entry):
 		super().__init__(health, player, accuracy, entry)
@@ -32,6 +31,9 @@ def main():
 	running = True
 	pygame.display.flip()
 	while running:
+		font.drawText("POKEMON", "assets/fonts/Font.png", (170, 50), screen, 1)
+		font.drawText("Battle", "assets/fonts/Font.png", (210, 140), screen, 1)
+		font.drawText("Simulator","assets/fonts/Font.png", (80, 230), screen, 1)
 		main_menu.draw(screen)
 		mouseObj.get_pos()
 		for event in pygame.event.get():
